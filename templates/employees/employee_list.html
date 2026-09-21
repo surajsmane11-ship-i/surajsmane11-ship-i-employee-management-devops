@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        a.button:hover {
+            background-color: #218838;
+        }
+
+        .actions a {
+            margin-right: 8px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee List</h2>
+    <a href="{% url 'employee_add' %}" class="button">Add Employee</a>
+    <table>
+        <tr>
+            <th>Name</th><th>Email</th><th>Contact</th><th>Department</th><th>Date Joined</th><th>Actions</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.email }}</td>
+            <td>{{ emp.contact }}</td>
+            <td>{{ emp.department.name }}</td>
+            <td>{{ emp.date_joined }}</td>
+            <td class="actions">
+                <a href="{% url 'employee_edit' emp.pk %}">Edit</a>
+                <a href="{% url 'employee_delete' emp.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
